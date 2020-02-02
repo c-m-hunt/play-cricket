@@ -13,5 +13,5 @@ module.exports = {
     "plugins": [
         "@typescript-eslint"
     ],
-    "ignorePatterns": "*/**/__tests__/*",
+    "ignorePatterns": ["*/**/__tests__/*", "jest.config.js"],
 };
