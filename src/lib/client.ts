@@ -8,12 +8,10 @@ export class NotAuthorisedError extends Error {}
 
 export class Client {
   public apiKey: string
-  public siteId: string
-  public baseURL = `http://play-cricket.com/api/v2/`
-  public http: AxiosInstance
-  public constructor(apiKey: string, siteId: string) {
+  private baseURL = `http://play-cricket.com/api/v2/`
+  private http: AxiosInstance
+  public constructor(apiKey: string) {
     this.apiKey = apiKey
-    this.siteId = siteId
     this.http = axios.create({
       baseURL: this.baseURL
     })
