@@ -1,0 +1,10 @@
+tsconfig.json
+.travis.yml
+.nojekyll
+dev/
+docs/
+dist/test/
+.npmignore
+
+// npm pack
+play-cricket-client-*.tgz

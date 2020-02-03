@@ -1,10 +1,11 @@
 {
   "name": "play-cricket-client",
   "version": "0.1.4",
-  "description": "",
+  "description": "Client for Play Cricket API. Hopefully taking the pain out of some of the requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "setup": "npm install",
     "build": "tsc --project tsconfig.json",
     "test": "jest --collect-coverage",
     "test:watch": "jest --watch",
@@ -12,7 +13,8 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "docs": "typedoc --out docs src"
+    "docs": "typedoc --out ./docs --mode modules --tsconfig ./tsconfig.json ./src/",
+    "postdocs": "shx cp .nojekyll docs/.nojekyll"
   },
   "author": "Chris Hunt",
   "repository": {
@@ -41,6 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "shx": "^0.3.2",
     "typedoc": "^0.16.9",
     "winston": "^3.2.1"
   }
