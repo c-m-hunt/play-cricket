@@ -33,18 +33,20 @@ describe("Play Cricket client class", () => {
     const data2 = await c.getLeagueTable(123)
     const data3 = await c.getMatches(1234, 2020)
     const data4 = await c.getMatchDetail(1234)
-    expect(mockedAxios.get).toBeCalledTimes(4)
+    const data5 = await c.getResults(1234, 2020)
+    expect(mockedAxios.get).toBeCalledTimes(5)
     expect(data1).toBe('test')
     expect(data2).toBe('test')
     expect(data3).toBe('test')
     expect(data4).toBe('test')
+    expect(data5).toBe('test')
   })
 
   test('it calls methods with converted queries', async () => {
     const c = new Client(apiKey)
     await c.getMatches(1234, 2020, {
       divisionId: "abc123",
-      fromMatchDate: new Date(2020, 3, 5)
+      fromEntryDate: new Date(2020, 3, 5)
     })
     expect(mockedAxios.get).toBeCalledTimes(1)
     expect(mockedAxios.get).toBeCalledWith(expect.any(String), {
@@ -52,7 +54,7 @@ describe("Play Cricket client class", () => {
         site_id: 1234,
         season: 2020,
         division_id: "abc123",
-        from_match_date: "05/03/2020",
+        from_entry_date: "05/03/2020",
         api_token: apiKey
       }
     })

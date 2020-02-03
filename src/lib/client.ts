@@ -62,15 +62,12 @@ export class Client {
     season: number,
     query: MatchQuery | null = null,
   ): Promise<MatchesResponse> => {
-    let pcQuery = {}
-    if (query) {
-      pcQuery = convertMatchQueryToPCQuery(query)
-    }
-    return await this.request<MatchesResponse>('matches.json', {
-      site_id: siteId,
+    return this.getMatchesEndpoint<MatchesResponse, MatchQuery>(
+      'matches.json',
+      siteId,
       season,
-      ...pcQuery
-    })
+      query
+    )
   }
 
   public getResults = async (
@@ -78,11 +75,25 @@ export class Client {
     season: number,
     query: ResultQuery | null = null,
   ): Promise<MatchesResponse> => {
+    return this.getMatchesEndpoint<MatchesResponse, ResultQuery>(
+      'result_summary.json',
+      siteId,
+      season,
+      query
+    )
+  }
+
+  private getMatchesEndpoint = async <T, U>(
+    endpoint: string,
+    siteId: number,
+    season: number,
+    query: U | null = null,
+  ): Promise<T> => {
     let pcQuery = {}
     if (query) {
       pcQuery = convertMatchQueryToPCQuery(query)
     }
-    return await this.request<MatchesResponse>('result_summary.json', {
+    return await this.request<T>(endpoint, {
       site_id: siteId,
       season,
       ...pcQuery

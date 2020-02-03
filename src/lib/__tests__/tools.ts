@@ -17,10 +17,10 @@ describe("Tools methods", () => {
   test('it converts query', () => {
     const testQuery: MatchQuery = {
       teamId: '123',
-      fromMatchDate: new Date(2019, 10, 5)
+      fromEntryDate: new Date(2019, 10, 5)
     }
     const convertedQuery = convertMatchQueryToPCQuery(testQuery)
     expect(convertedQuery['team_id']).toBe('123')
-    expect(convertedQuery['from_match_date']).toBe('05/10/2019')
+    expect(convertedQuery['from_entry_date']).toBe('05/10/2019')
   })
 })
