@@ -40,6 +40,24 @@ describe("Play Cricket client class", () => {
     expect(data4).toBe('test')
   })
 
+  test('it calls methods with converted queries', async () => {
+    const c = new Client(apiKey)
+    await c.getMatches(1234, 2020, {
+      divisionId: "abc123",
+      fromMatchDate: new Date(2020, 3, 5)
+    })
+    expect(mockedAxios.get).toBeCalledTimes(1)
+    expect(mockedAxios.get).toBeCalledWith(expect.any(String), {
+      params: {
+        site_id: 1234,
+        season: 2020,
+        division_id: "abc123",
+        from_match_date: "05/03/2020",
+        api_token: apiKey
+      }
+    })
+  })
+
   test('handles 404', async (done) => {
     mockedAxios.get.mockImplementation(() => {
       return Promise.reject({
