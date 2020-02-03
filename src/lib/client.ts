@@ -5,7 +5,7 @@ import { CompetitionsResponse } from './interface/competitions'
 import { LeagueTableResponse } from './interface/leagueTable'
 import { MatchesResponse } from './interface/matches'
 import { MatchDetailResponse } from './interface/matchDetail'
-import { MatchQuery } from './interface/general'
+import { MatchQuery, ResultQuery } from './interface/general'
 import { convertMatchQueryToPCQuery } from './tools'
 
 export class NotFoundError extends Error {}
@@ -73,16 +73,21 @@ export class Client {
     })
   }
 
-
-  // public getResults = async (
-  //   siteId: number,  
-  //   season: number,
-  // ): Promise<MatchesResponse> => {
-  //   return await this.request<MatchesResponse>('results.json', {
-  //     site_id: siteId,
-  //     season
-  //   })
-  // }
+  public getResults = async (
+    siteId: number,
+    season: number,
+    query: ResultQuery | null = null,
+  ): Promise<MatchesResponse> => {
+    let pcQuery = {}
+    if (query) {
+      pcQuery = convertMatchQueryToPCQuery(query)
+    }
+    return await this.request<MatchesResponse>('result_summary.json', {
+      site_id: siteId,
+      season,
+      ...pcQuery
+    })
+  }
 
   public getMatchDetail = async (matchId: number): Promise<MatchDetailResponse> => {
     return await this.request<MatchDetailResponse>('match_detail.json', {
