@@ -6,21 +6,27 @@
   "types" : "dist/index.d.ts",
   "scripts": {
     "build": "tsc --project tsconfig.json",
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "test:watch": "jest --watch",
     "lint": "eslint './src/**'",
     "prepare" : "npm run build",
     "prepublishOnly" : "npm test && npm run lint",
     "preversion" : "npm run lint"
   },
-  "author": "",
+  "author": "Chris Hunt",
+  "repository": {
+    "url": "https://github.com/c-m-hunt/play-cricket"
+  },
+  "bugs": {
+    "url": "https://github.com/c-m-hunt/play-cricket/issues"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^25.1.1",
+    "@types/node": "^13.7.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/eslint-plugin-tslint": "^2.8.0",
     "@typescript-eslint/parser": "^2.18.0",
-    "body-parser": "^1.19.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prefer-arrow": "^1.1.6",
@@ -33,7 +39,6 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "@types/node": "^13.7.0",
     "axios": "^0.19.2",
     "morgan": "^1.9.1",
     "winston": "^3.2.1"
