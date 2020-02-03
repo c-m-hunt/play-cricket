@@ -1,5 +1,5 @@
 language: nodejs
-
+version: 1.0
 node_js :
   - stable
 
@@ -29,6 +29,7 @@ deploy:
     on:
       tags: true
   - provider: npm
+    edge: true
     skip_cleanup: true
     email: "chris@chris-hunt.net"
     api_key: $NPM_TOKEN
