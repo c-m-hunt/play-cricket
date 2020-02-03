@@ -3,7 +3,8 @@ import axios, { AxiosInstance } from 'axios'
 import { CompetitionTeamsResponse } from './interface/competitionTeams'
 import { CompetitionsResponse } from './interface/competitions'
 import { LeagueTableResponse } from './interface/leagueTable'
-import { MatchesResponse } from './interface/fixtures'
+import { MatchesResponse } from './interface/matches'
+import { MatchDetailResponse } from './interface/matchDetail'
 
 export class NotFoundError extends Error {}
 export class NotAuthorisedError extends Error {}
@@ -61,6 +62,12 @@ export class Client {
     return await this.request<MatchesResponse>('matches.json', {
       site_id: siteId,
       season
+    })
+  }
+
+  public getMatchDetail = async (matchId: number): Promise<MatchDetailResponse> => {
+    return await this.request<MatchDetailResponse>('match_detail.json', {
+      match_id: matchId
     })
   }
 }
