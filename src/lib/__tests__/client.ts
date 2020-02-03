@@ -38,12 +38,3 @@ describe("Play Cricket client class", () => {
     done()
   })
 })
-
-// describe("Play Cricket live data client class", () => {
-//   test('it returns some basic data', async () => {
-//     const c = new Client(apiKey)
-//     const data = await c.getTeamsInComp('87298')
-//     expect(data).toBe('test')
-//   })
-// })
-
