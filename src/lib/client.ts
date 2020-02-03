@@ -2,6 +2,9 @@
 import axios, { AxiosInstance } from 'axios'
 import { CompetitionTeamsResponse } from './interface/competitionTeams'
 import { CompetitionsResponse } from './interface/competitions'
+import { LeagueTableResponse } from './interface/leagueTable'
+import { MatchesResponse } from './interface/matches'
+import { MatchDetailResponse } from './interface/matchDetail'
 
 export class NotFoundError extends Error {}
 export class NotAuthorisedError extends Error {}
@@ -34,15 +37,37 @@ export class Client {
     }
   }
 
-  public getTeamsInComp = async (id: string): Promise<CompetitionTeamsResponse> => {
+  public getTeamsInComp = async (id: number): Promise<CompetitionTeamsResponse> => {
     return await this.request<CompetitionTeamsResponse>('competition_teams.json', { id })
   }
 
-  public getCompetitions = async (season: string, leagueId: string, competitionType: "divisions"|"cups"): Promise<CompetitionsResponse> => {
+  public getCompetitions = async (season: number, leagueId: number, competitionType: "divisions"|"cups"): Promise<CompetitionsResponse> => {
     return await this.request<CompetitionsResponse>('competitions.json', {
       season,
       league_id: leagueId,
       competition_type: competitionType
+    })
+  }
+
+  public getLeagueTable = async (divId: number): Promise<LeagueTableResponse> => {
+    return await this.request<LeagueTableResponse>('league_table.json', {
+      division_id: divId
+    })
+  }
+
+  public getMatches = async (
+    siteId: number,
+    season: number,
+  ): Promise<MatchesResponse> => {
+    return await this.request<MatchesResponse>('matches.json', {
+      site_id: siteId,
+      season
+    })
+  }
+
+  public getMatchDetail = async (matchId: number): Promise<MatchDetailResponse> => {
+    return await this.request<MatchDetailResponse>('match_detail.json', {
+      match_id: matchId
     })
   }
 }
