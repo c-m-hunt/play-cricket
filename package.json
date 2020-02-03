@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "morgan": "^1.9.1",
     "typedoc": "^0.16.9",
     "winston": "^3.2.1"
   }
