@@ -1,6 +1,6 @@
 {
   "name": "play-cricket-client",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Client for Play Cricket API. Hopefully taking the pain out of some of the requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,6 +36,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "shx": "^0.3.2",
     "ts-jest": "^24.2.0",
     "ts-node": "^8.4.1",
     "tslint": "^5.20.1",
@@ -43,7 +44,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "shx": "^0.3.2",
     "typedoc": "^0.16.9",
     "winston": "^3.2.1"
   }
