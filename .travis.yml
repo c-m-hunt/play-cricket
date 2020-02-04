@@ -24,7 +24,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     file_glob: true
-    file: "play-cricket-client-*.tgz"
+    file: "play-cricket-client-$GIT_TAG.tgz"
     skip_cleanup: true
     on:
       tags: true
