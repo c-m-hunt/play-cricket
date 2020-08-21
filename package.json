@@ -1,6 +1,6 @@
 {
   "name": "play-cricket-client",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Client for Play Cricket API. Hopefully taking the pain out of some of the requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
