@@ -1,20 +1,23 @@
 {
   "name": "play-cricket-client",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "Client for Play Cricket API. Hopefully taking the pain out of some of the requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "setup": "npm install",
-    "build": "tsc --project tsconfig.json",
-    "test": "jest --collect-coverage",
-    "test:watch": "jest --watch",
-    "lint": "eslint './src/**'",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "docs": "typedoc --out ./docs --mode modules --tsconfig ./tsconfig.json ./src/",
-    "postdocs": "shx cp .nojekyll docs/.nojekyll"
+    "setup": "bun install",
+    "build": "bun build:tsc",
+    "build:tsc": "bun x tsc --project tsconfig.json",
+    "test": "bun test --coverage",
+    "test:watch": "bun test --watch",
+    "lint": "bun x @biomejs/biome lint ./src",
+    "lint:fix": "bun x @biomejs/biome lint --write ./src",
+    "format": "bun x @biomejs/biome format --write ./src",
+    "check": "bun x @biomejs/biome check ./src",
+    "check:fix": "bun x @biomejs/biome check --write ./src",
+    "prepublishOnly": "bun run build && bun test",
+    "docs": "bun x typedoc --out ./docs --tsconfig ./tsconfig.json ./src/",
+    "postdocs": "cp .nojekyll docs/.nojekyll"
   },
   "author": "Chris Hunt",
   "repository": {
@@ -25,26 +28,13 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "@types/node": "^13.7.0",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/eslint-plugin-tslint": "^2.8.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-prefer-arrow": "^1.1.6",
-    "eslint-plugin-prettier": "^3.1.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "shx": "^0.3.2",
-    "ts-jest": "^24.2.0",
-    "ts-node": "^8.4.1",
-    "tslint": "^5.20.1",
-    "typescript": "^3.3.3"
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "typedoc": "^0.16.9",
-    "winston": "^3.2.1"
+    "axios": "^1.6.0",
+    "typedoc": "^0.25.0",
+    "winston": "^3.11.0"
   }
 }

@@ -1,15 +1,15 @@
-import { CompetitionType } from "./matches";
+import type { CompetitionType } from './matches'
 
 export interface MatchQuery {
-  divisionId?: string;
-  cupId?: string;
-  teamId?: string;
-  competitionType?: CompetitionType;
-  fromEntryDate?: Date;
-  toEntryDate?: Date;
+  divisionId?: string
+  cupId?: string
+  teamId?: string
+  competitionType?: CompetitionType
+  fromEntryDate?: Date
+  toEntryDate?: Date
 }
 
 export interface ResultQuery extends MatchQuery {
-  fromMatchDate?: Date;
-  toMatchDate?: Date;
+  fromMatchDate?: Date
+  toMatchDate?: Date
 }

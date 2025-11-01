@@ -1,16 +1,38 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    // Bun supports ESNext and modern module resolution
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Best practices
+    "strict": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "es6",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
+
+    // Output settings
     "sourceMap": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+
+    // Bun type definitions
+    "types": ["bun-types"]
   },
-  "lib": ["ES2015"],
   "include": [
-      "src/**/*"
+    "src/**/*"
   ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__"
+  ]
 }
