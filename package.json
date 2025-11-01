@@ -4,10 +4,15 @@
   "description": "Client for Play Cricket API. Hopefully taking the pain out of some of the requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "play-cricket-mcp": "./dist/mcp/server.js"
+  },
   "scripts": {
     "setup": "bun install",
-    "build": "bun build:tsc",
+    "build": "bun run build:tsc && bun run build:mcp",
     "build:tsc": "bun x tsc --project tsconfig.json",
+    "build:mcp": "bun build src/mcp/server.ts --target node --outdir dist/mcp && chmod +x dist/mcp/server.js",
+    "mcp": "bun run build:mcp && node dist/mcp/server.js",
     "test": "bun test --coverage",
     "test:watch": "bun test --watch",
     "lint": "bun x @biomejs/biome lint ./src",
@@ -27,14 +32,26 @@
     "url": "https://github.com/c-m-hunt/play-cricket/issues"
   },
   "license": "ISC",
+  "keywords": [
+    "cricket",
+    "play-cricket",
+    "mcp",
+    "model-context-protocol",
+    "api",
+    "sports",
+    "typescript",
+    "bun"
+  ],
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/bun": "latest",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
     "axios": "^1.6.0",
     "typedoc": "^0.25.0",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "zod": "^4.1.12"
   }
 }
