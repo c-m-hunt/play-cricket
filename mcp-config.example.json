@@ -1,0 +1,10 @@
+{
+    "mcpServers": {
+        "play-cricket": {
+            "command": "play-cricket-mcp",
+            "env": {
+                "PLAY_CRICKET_API_KEY": "your-api-key-here"
+            }
+        }
+    }
+}

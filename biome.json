@@ -7,7 +7,14 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["dist", "node_modules", "coverage", "docs", "*.lock", "*.lockb"]
+		"ignore": [
+			"dist",
+			"node_modules",
+			"coverage",
+			"docs",
+			"*.lock",
+			"*.lockb"
+		]
 	},
 	"formatter": {
 		"enabled": true,
