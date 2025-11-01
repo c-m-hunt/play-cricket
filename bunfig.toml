@@ -1,0 +1,9 @@
+# Bun configuration file
+# https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Install packages using the registry
+registry = "https://registry.npmjs.org/"
+
+[install.scopes]
+# Configure scoped registries here if needed

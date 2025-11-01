@@ -1,8 +1,8 @@
 export interface CompetitionsResponse {
-  competitions: Competition[];
+  competitions: Competition[]
 }
 
 export interface Competition {
-  id:   number;
-  name: string;
+  id: number
+  name: string
 }

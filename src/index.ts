@@ -1,3 +1,3 @@
-import { Client } from './lib/client';
+import { Client } from './lib/client'
 
 export { Client }
