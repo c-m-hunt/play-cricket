@@ -31,24 +31,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: bun install
       - run: bun run build
-      - run: npm publish
+      - run: bun publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
-      - run: bun install
-      - run: bun run build
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NPM_CONFIG_TOKEN: ${{secrets.NPM_CONFIG_TOKEN}}
