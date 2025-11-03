@@ -10,16 +10,21 @@ npm install -g play-cricket-client
 
 **Claude Desktop Config** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 ```json
+2. Configure your MCP client (e.g., Claude Desktop):
+```json
 {
   "mcpServers": {
     "play-cricket": {
       "command": "play-cricket-mcp",
       "env": {
-        "PLAY_CRICKET_API_KEY": "your-api-key-here"
+        "PLAY_CRICKET_API_KEY": "your-api-key-here",
+        "MCP_OUTPUT_TOON": "1"
       }
     }
   }
 }
+```
+💡 **Tip:** Set `MCP_OUTPUT_TOON=1` for 30-60% fewer tokens!
 ```
 
 ### Option 2: Local Development (Developers)

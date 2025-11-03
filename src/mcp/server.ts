@@ -7,6 +7,7 @@ import {
   ListToolsRequestSchema,
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js'
+import { encode as encodeToon } from '@toon-format/toon'
 import { Client } from '../lib/client.js'
 import type { MatchQuery, ResultQuery } from '../lib/interface/general.js'
 import {
@@ -26,6 +27,7 @@ import {
 
 // Get API key from environment variable
 const API_KEY = process.env.PLAY_CRICKET_API_KEY
+const USE_TOON_FORMAT = process.env.MCP_OUTPUT_TOON === '1'
 
 if (!API_KEY) {
   console.error('Error: PLAY_CRICKET_API_KEY environment variable is required')
@@ -34,6 +36,20 @@ if (!API_KEY) {
 
 // Create Play Cricket client
 const client = new Client(API_KEY)
+
+/**
+ * Format data for output based on MCP_OUTPUT_TOON environment variable
+ * If MCP_OUTPUT_TOON=1, returns TOON format, otherwise JSON
+ */
+function formatOutput(data: unknown): string {
+  if (USE_TOON_FORMAT) {
+    return encodeToon(data, {
+      delimiter: '\t', // Tab delimiter for better token efficiency
+      indent: 2,
+    })
+  }
+  return JSON.stringify(data, null, 2)
+}
 
 // Define available tools
 const TOOLS: Tool[] = [
@@ -398,7 +414,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: formatOutput(result),
             },
           ],
         }
@@ -414,7 +430,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: formatOutput(result),
             },
           ],
         }
@@ -426,7 +442,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: formatOutput(result),
             },
           ],
         }
@@ -439,7 +455,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: formatOutput(result),
             },
           ],
         }
@@ -462,7 +478,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(filteredResult, null, 2),
+              text: formatOutput(filteredResult),
             },
           ],
         }
@@ -474,7 +490,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: formatOutput(result),
             },
           ],
         }
@@ -496,7 +512,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify({ teams, count: teams.length }, null, 2),
+              text: formatOutput({ teams, count: teams.length }),
             },
           ],
         }
@@ -520,7 +536,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify({ fixtures, count: fixtures.length }, null, 2),
+              text: formatOutput({ fixtures, count: fixtures.length }),
             },
           ],
         }
@@ -547,7 +563,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify({ results, count: results.length }, null, 2),
+              text: formatOutput({ results, count: results.length }),
             },
           ],
         }
@@ -571,7 +587,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify({ fixtures, count: fixtures.length }, null, 2),
+              text: formatOutput({ fixtures, count: fixtures.length }),
             },
           ],
         }
@@ -595,7 +611,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
           content: [
             {
               type: 'text',
-              text: JSON.stringify({ results, count: results.length }, null, 2),
+              text: formatOutput({ results, count: results.length }),
             },
           ],
         }

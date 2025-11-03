@@ -45,16 +45,51 @@ npm install play-cricket-client
 
 ### Environment Variables
 
-Set your Play Cricket API key:
+**Required:**
+- `PLAY_CRICKET_API_KEY` - Your Play Cricket API key
+
+**Optional:**
+- `MCP_OUTPUT_TOON` - Set to `1` to enable TOON format output (default: JSON)
 
 ```bash
 export PLAY_CRICKET_API_KEY="your-api-key-here"
+export MCP_OUTPUT_TOON="1"  # Optional: Enable TOON format for 30-60% token savings
+```
+
+#### TOON Format
+
+[TOON (Token-Oriented Object Notation)](https://github.com/toon-format/toon) is a compact data format designed for LLMs that reduces token usage by 30-60% compared to JSON. When `MCP_OUTPUT_TOON=1`, all MCP tool responses are returned in TOON format instead of JSON.
+
+**Benefits:**
+- 🎯 30-60% fewer tokens than JSON
+- 📊 Especially efficient for tabular data (fixtures, results, teams)
+- 🤖 LLM-friendly with explicit lengths and field names
+- ⚡ Tab-delimited format for maximum efficiency
+
+**Example comparison:**
+
+JSON (84 tokens):
+```json
+{
+  "teams": [
+    { "team_id": "1", "team_name": "Team A", "club_name": "Club X" },
+    { "team_id": "2", "team_name": "Team B", "club_name": "Club Y" }
+  ]
+}
+```
+
+TOON (52 tokens, 38% reduction):
+```toon
+teams[2	]{team_id	team_name	club_name}:
+  1	Team A	Club X
+  2	Team B	Club Y
 ```
 
 ### MCP Client Configuration
 
 Add to your MCP client configuration (e.g., Claude Desktop, Cline, etc.):
 
+**Standard JSON output:**
 ```json
 {
   "mcpServers": {
@@ -62,6 +97,21 @@ Add to your MCP client configuration (e.g., Claude Desktop, Cline, etc.):
       "command": "play-cricket-mcp",
       "env": {
         "PLAY_CRICKET_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+**With TOON format (30-60% fewer tokens):**
+```json
+{
+  "mcpServers": {
+    "play-cricket": {
+      "command": "play-cricket-mcp",
+      "env": {
+        "PLAY_CRICKET_API_KEY": "your-api-key-here",
+        "MCP_OUTPUT_TOON": "1"
       }
     }
   }

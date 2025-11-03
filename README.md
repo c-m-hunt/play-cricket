@@ -88,6 +88,7 @@ This package includes a Model Context Protocol (MCP) server that allows AI assis
 - 🎯 **Optimized for LLMs** - 5 specialized tools return minimal, focused data
 - 🚀 **Fast** - Streamlined responses reduce token usage and improve speed
 - 📊 **Comprehensive** - Full API coverage plus smart filtering and aggregation
+- 🎒 **TOON Format Support** - Optional 30-60% token reduction with TOON output format
 
 ### Quick Start
 
@@ -103,7 +104,8 @@ npm install -g play-cricket-client
     "play-cricket": {
       "command": "play-cricket-mcp",
       "env": {
-        "PLAY_CRICKET_API_KEY": "your-api-key-here"
+        "PLAY_CRICKET_API_KEY": "your-api-key-here",
+        "MCP_OUTPUT_TOON": "1"
       }
     }
   }
@@ -111,6 +113,8 @@ npm install -g play-cricket-client
 ```
 
 3. Restart your MCP client and start asking about cricket data!
+
+**Optional:** Set `MCP_OUTPUT_TOON=1` to enable [TOON format](https://github.com/toon-format/toon) for 30-60% token reduction (especially effective with tabular data).
 
 ### Available Tools
 
