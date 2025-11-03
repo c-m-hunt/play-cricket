@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'bun:test'
-import {
-  extractUniqueTeams,
-  filterTeamFixtures,
-  filterTeamResults,
-  filterFixturesByDate,
-  filterResultsByDate,
-} from '../helpers'
 import type { Match } from '../../lib/interface/matches'
 import type { ResultSummary } from '../../lib/interface/resultSummary'
+import {
+  extractUniqueTeams,
+  filterFixturesByDate,
+  filterResultsByDate,
+  filterTeamFixtures,
+  filterTeamResults,
+} from '../helpers'
 
 // Mock data for testing
 const mockMatches: Match[] = [

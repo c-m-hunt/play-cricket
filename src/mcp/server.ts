@@ -2,19 +2,19 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import {
+  type CallToolRequest,
   CallToolRequestSchema,
   ListToolsRequestSchema,
-  type CallToolRequest,
   type Tool,
 } from '@modelcontextprotocol/sdk/types.js'
 import { Client } from '../lib/client.js'
 import type { MatchQuery, ResultQuery } from '../lib/interface/general.js'
 import {
   extractUniqueTeams,
-  filterTeamFixtures,
-  filterTeamResults,
   filterFixturesByDate,
   filterResultsByDate,
+  filterTeamFixtures,
+  filterTeamResults,
 } from './helpers.js'
 
 /**
@@ -448,16 +448,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       case 'get_results': {
         const query = parseDateQuery(args.query as Record<string, unknown> | undefined)
         const result = await client.getResults(args.siteId as number, args.season as number, query)
-        
+
         // Remove innings data to reduce context size
         const filteredResult = {
           ...result,
-          result_summary: result.result_summary?.map(summary => {
+          result_summary: result.result_summary?.map((summary) => {
             const { innings, ...summaryWithoutInnings } = summary
             return summaryWithoutInnings
           }),
         }
-        
+
         return {
           content: [
             {

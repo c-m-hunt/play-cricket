@@ -45,10 +45,7 @@ export interface ResultBrief {
 /**
  * Extract unique teams from matches and results
  */
-export function extractUniqueTeams(
-  matches: Match[],
-  results: ResultSummary[],
-): TeamInfo[] {
+export function extractUniqueTeams(matches: Match[], results: ResultSummary[]): TeamInfo[] {
   const teamsMap = new Map<string, TeamInfo>()
 
   // Process matches
@@ -118,10 +115,7 @@ export function filterTeamFixtures(matches: Match[], teamId: string): FixtureSum
 /**
  * Filter results for a specific team and convert to brief summary
  */
-export function filterTeamResults(
-  results: ResultSummary[],
-  teamId: string,
-): ResultBrief[] {
+export function filterTeamResults(results: ResultSummary[], teamId: string): ResultBrief[] {
   return results
     .filter((result) => result.home_team_id === teamId || result.away_team_id === teamId)
     .map((result) => {
